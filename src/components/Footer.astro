@@ -1,0 +1,44 @@
+---
+const services = [
+  'Traditional Thai Massage',
+  'Deep Tissue Muscle Massage',
+  'Swedish Massage',
+  'Aromatherapy Massage',
+  'PAÑPURI Express',
+  'Reflexology',
+  'Hair Styling',
+];
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+---
+<footer class="bg-spa-elevated mt-24" style="border-top:1px solid rgba(215,176,154,0.15)">
+  <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-3 gap-12">
+    <div>
+      <div class="flex items-center gap-4 mb-4">
+        <img src={withBase('/images/logo.jpg')} alt="MOR SPA 789 logo" class="h-14 w-14 rounded-sm object-cover" />
+        <p class="text-spa-gold font-light" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:0.18em">MOR SPA 789</p>
+      </div>
+      <p class="text-spa-muted text-sm leading-relaxed">Authentic Thai massage, holistic treatments, waxing and unisex hair styling in Kenilworth. Open daily 11AM–10PM.</p>
+    </div>
+    <div>
+      <p class="text-spa-gold mb-6 text-xs uppercase font-medium" style="letter-spacing:0.18em">Treatments</p>
+      <ul class="space-y-2">
+        {services.map(s => (
+          <li><a href={withBase('/services')} class="text-spa-muted text-sm hover:text-spa-gold transition-colors">{s}</a></li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <p class="text-spa-gold mb-6 text-xs uppercase font-medium" style="letter-spacing:0.18em">Visit</p>
+      <p class="text-spa-muted text-sm leading-relaxed">81 Abbey End, Kenilworth,<br />Warwickshire, CV8 1QJ</p>
+      <p class="text-spa-muted text-sm mt-3">07544 888 777<br />MorSpa789@gmail.com</p>
+      <a href={withBase('/contact')} class="inline-block mt-6 text-spa-gold text-xs uppercase font-medium px-5 py-2.5 hover:bg-spa-gold hover:text-spa-bg transition-all duration-300" style="border:1px solid rgba(215,176,154,0.4);letter-spacing:0.15em">
+        Call or Text
+      </a>
+    </div>
+  </div>
+  <div class="px-6 py-6 text-center" style="border-top:1px solid rgba(215,176,154,0.1)">
+    <p class="text-spa-muted text-xs" style="letter-spacing:0.1em">© 2026 MOR SPA 789. All rights reserved. Kenilworth, Warwickshire.</p>
+  </div>
+</footer>

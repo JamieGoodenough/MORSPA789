@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-spa-bg:       #0c0a09;
+  --color-spa-elevated: #17181d;
+  --color-spa-card:     #1c1918;
+  --color-spa-text:     #f5f0e8;
+  --color-spa-muted:    #9a8f85;
+  --color-spa-gold:     #d7b09a;
+  --color-spa-sage:     #425d67;
+
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body:    "DM Sans", system-ui, sans-serif;
+}

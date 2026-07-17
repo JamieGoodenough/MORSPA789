@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'MOR SPA 789 | Thai Massage & Unisex Hair Stylist, Kenilworth',
+  description = 'Authentic Thai massage, holistic treatments, waxing and unisex hair styling in Kenilworth. Open daily 11AM–10PM.',
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-base: #0c0a09;
+      --bg-elevated: #17181d;
+      --bg-card: #1c1918;
+      --text-primary: #f5f0e8;
+      --text-secondary: #9a8f85;
+      --accent-gold: #d7b09a;
+      --accent-sage: #425d67;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      color: var(--text-primary);
+    }
+    ::selection { background: var(--accent-gold); color: #0c0a09; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 2px; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <script is:inline define:vars={{ base }}>
+    const authKey = 'morspa789-preview-auth';
+    const normalizedBase = base.endsWith('/') ? base : `${base}/`;
+    const loginPath = `${normalizedBase}login/`.replace(/\/+/g, '/').replace(':/', '://');
+    const currentPath = window.location.pathname;
+    if (currentPath !== loginPath && !localStorage.getItem(authKey)) {
+      window.location.replace(loginPath);
+    }
+  </script>
+  <slot name="navbar" />
+  <main>
+    <slot />
+  </main>
+  <slot name="footer" />
+</body>
+</html>

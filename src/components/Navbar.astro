@@ -1,0 +1,97 @@
+---
+const navLinks = [
+  { href: '/services', label: 'Services' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+---
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+  <nav class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-6">
+    <a href={withBase('/')} class="flex items-center gap-4 min-w-0">
+      <img src={withBase('/images/logo.jpg')} alt="MOR SPA 789 logo" class="h-12 w-12 rounded-sm object-cover flex-shrink-0" />
+      <span class="hidden sm:block text-spa-gold font-light truncate" style="font-family:'Cormorant Garamond',serif;font-size:1.35rem;letter-spacing:0.18em">MOR SPA 789</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-10">
+      {navLinks.map(link => (
+        <li>
+          <a href={withBase(link.href)} class="text-xs uppercase text-spa-muted hover:text-spa-gold transition-colors duration-300 font-medium" style="letter-spacing:0.15em;font-family:'DM Sans',sans-serif">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a href={withBase('/contact')} class="hidden md:inline-flex border border-spa-gold text-spa-gold px-6 py-2.5 text-xs uppercase font-medium hover:bg-spa-gold hover:text-spa-bg transition-all duration-300" style="letter-spacing:0.15em">
+      Call or Text
+    </a>
+
+    <button id="mobile-menu-btn" class="md:hidden text-spa-text" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden md:hidden bg-spa-elevated px-6 py-6" style="border-top:1px solid rgba(215,176,154,0.2)">
+    <ul class="flex flex-col gap-6">
+      {navLinks.map(link => (
+        <li>
+          <a href={withBase(link.href)} class="text-sm uppercase text-spa-text hover:text-spa-gold transition-colors" style="letter-spacing:0.15em">{link.label}</a>
+        </li>
+      ))}
+      <li>
+        <a href={withBase('/contact')} class="inline-flex border border-spa-gold text-spa-gold px-6 py-2.5 text-xs uppercase font-medium hover:bg-spa-gold hover:text-spa-bg transition-all duration-300" style="letter-spacing:0.15em">
+          Call or Text
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const sentinel = document.querySelector('.hero-sentinel');
+
+  if (navbar) {
+    const applySolid = () => {
+      navbar.style.backgroundColor = 'rgba(23,24,29,0.96)';
+      navbar.style.backdropFilter = 'blur(8px)';
+      navbar.style.borderBottom = '1px solid rgba(215,176,154,0.14)';
+    };
+
+    const applyTransparent = () => {
+      navbar.style.backgroundColor = 'transparent';
+      navbar.style.backdropFilter = 'none';
+      navbar.style.borderBottom = 'none';
+    };
+
+    applySolid();
+
+    if (sentinel) {
+      const obs = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting && window.scrollY < 24) {
+          applyTransparent();
+        } else {
+          applySolid();
+        }
+      }, { threshold: 0 });
+      obs.observe(sentinel);
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 24) {
+          applySolid();
+        }
+      }, { passive: true });
+    }
+  }
+
+  document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+    document.getElementById('mobile-menu')?.classList.toggle('hidden');
+  });
+</script>
