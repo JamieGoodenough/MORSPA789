@@ -1,0 +1,131 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview Access | MOR SPA 789</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      background-color: #0c0a09;
+      color: #f5f0e8;
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { width: 100%; max-width: 380px; text-align: center; }
+    .logo-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.9rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      color: #d7b09a;
+      margin-bottom: 0.5rem;
+    }
+    .sub {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #9a8f85;
+      margin-bottom: 2.75rem;
+    }
+    .divider {
+      width: 36px;
+      height: 1px;
+      background: rgba(215,176,154,0.4);
+      margin: 0 auto 2.75rem;
+    }
+    form { display: flex; flex-direction: column; gap: 0.875rem; }
+    input[type="password"] {
+      background: #1c1918;
+      border: 1px solid rgba(215,176,154,0.25);
+      color: #f5f0e8;
+      padding: 0.95rem 1.25rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.3s;
+      border-radius: 2px;
+      width: 100%;
+    }
+    input[type="password"]::placeholder { color: rgba(154,143,133,0.45); letter-spacing: 0.1em; }
+    input[type="password"]:focus { border-color: #d7b09a; }
+    button[type="submit"] {
+      background: #d7b09a;
+      color: #0c0a09;
+      border: none;
+      padding: 0.95rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      cursor: pointer;
+      transition: opacity 0.3s;
+      border-radius: 2px;
+      width: 100%;
+    }
+    button[type="submit"]:hover { opacity: 0.86; }
+    .error-msg {
+      display: none;
+      background: rgba(215,176,154,0.07);
+      border: 1px solid rgba(215,176,154,0.22);
+      padding: 0.75rem 1rem;
+      font-size: 0.78rem;
+      color: #d7b09a;
+      border-radius: 2px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <img src={`${base}images/logo.jpg`} alt="MOR SPA 789 logo" style="width:110px;border-radius:4px;margin:0 auto 1rem;display:block" />
+    <p class="logo-text">MOR SPA 789</p>
+    <p class="sub">Site Preview</p>
+    <div class="divider"></div>
+    <form id="preview-login-form">
+      <p id="preview-error" class="error-msg">Incorrect password. Please try again.</p>
+      <input type="password" name="password" placeholder="Enter preview password" autocomplete="current-password" required autofocus />
+      <button type="submit">Enter</button>
+    </form>
+  </div>
+  <script is:inline define:vars={{ base }}>
+    const form = document.getElementById('preview-login-form');
+    const errorEl = document.getElementById('preview-error');
+    const authKey = 'morspa789-preview-auth';
+    const previewPassword = 'annie2026';
+
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = form.querySelector('input[name="password"]');
+      const value = input?.value ?? '';
+
+      if (value === previewPassword) {
+        localStorage.setItem(authKey, 'yes');
+        window.location.replace(base);
+        return;
+      }
+
+      if (errorEl) {
+        errorEl.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>
