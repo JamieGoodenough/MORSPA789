@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="Contact & Booking | MOR SPA 789">
+  <Navbar slot="navbar" />
+  <Footer slot="footer" />
+
+  <div class="min-h-screen pt-36 pb-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-16">
+        <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.25em">Get in Touch</p>
+        <h1 class="font-light text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:-0.02em">Call or Text to Arrange</h1>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-20 items-start">
+        <div>
+          <div class="w-12 h-px bg-spa-gold mb-10"></div>
+          <p class="text-spa-muted leading-relaxed mb-10">
+            MOR SPA 789 welcomes enquiries for Thai massage, deep tissue treatments, holistic therapies, waxing and unisex hair styling in Kenilworth. The easiest way to arrange an appointment is to call or send a text directly.
+          </p>
+
+          <div class="space-y-8 mb-12">
+            {[
+              { label: 'Location', value: '81 Abbey End, Kenilworth, Warwickshire, CV8 1QJ' },
+              { label: 'Opening Hours', value: '11AM – 10PM Daily' },
+              { label: 'Phone', value: '07544 888 777' },
+              { label: 'Email', value: 'MorSpa789@gmail.com' },
+            ].map(item => (
+              <div class="pb-6" style="border-bottom:1px solid rgba(215,176,154,0.1)">
+                <p class="text-spa-gold text-xs uppercase mb-2 font-medium" style="letter-spacing:0.18em">{item.label}</p>
+                <p class="text-spa-text">{item.value}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="p-8 bg-spa-card" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px">
+            <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.18em">Massage Pricing Starts From</p>
+            <p class="text-spa-gold font-light mb-2" style="font-family:'Cormorant Garamond',serif;font-size:2.5rem">£30</p>
+            <p class="text-spa-muted text-sm">30-minute aromatherapy treatment · most massage services from £35</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="p-8 bg-spa-card" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px">
+            <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.18em">Best Way to Book</p>
+            <h2 class="text-spa-text mb-4" style="font-family:'Cormorant Garamond',serif;font-size:2rem">Message or call Chayanan directly</h2>
+            <p class="text-spa-muted text-sm leading-relaxed mb-8">To arrange an appointment, simply get in touch by phone or text with the treatment you want and a preferred day or time. You can also email for general enquiries.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="tel:07544888777" class="inline-flex justify-center bg-spa-gold text-spa-bg px-6 py-4 text-xs uppercase font-medium hover:opacity-90 transition-opacity" style="letter-spacing:0.18em;border-radius:2px">
+                Call 07544 888 777
+              </a>
+              <a href="sms:07544888777" class="inline-flex justify-center border border-spa-gold text-spa-gold px-6 py-4 text-xs uppercase font-medium hover:bg-spa-gold hover:text-spa-bg transition-all" style="letter-spacing:0.18em;border-radius:2px">
+                Text to Book
+              </a>
+            </div>
+          </div>
+
+          <div class="p-8 bg-spa-card" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px">
+            <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.18em">What to Include</p>
+            <ul class="space-y-3 text-spa-muted text-sm leading-relaxed">
+              <li>• Your name</li>
+              <li>• Preferred treatment</li>
+              <li>• Preferred day / time</li>
+              <li>• Any specific concerns (back pain, tension, hair service, etc.)</li>
+            </ul>
+          </div>
+
+          <div class="p-8 bg-spa-card" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px">
+            <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.18em">Email</p>
+            <a href="mailto:MorSpa789@gmail.com" class="text-spa-text hover:text-spa-gold transition-colors">MorSpa789@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

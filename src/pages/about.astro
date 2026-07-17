@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+---
+<Layout title="About MOR SPA 789 | Chayanan">
+  <Navbar slot="navbar" />
+  <Footer slot="footer" />
+
+  <section class="relative flex items-end overflow-hidden" style="height:55vh;min-height:400px;padding-bottom:5rem">
+    <div class="hero-sentinel absolute" style="top:50%;left:0;right:0;height:1px;pointer-events:none" aria-hidden="true"></div>
+    <img src={withBase('/images/room-hero.jpg')} alt="Treatment room at MOR SPA 789" class="absolute inset-0 w-full h-full object-cover object-center" loading="eager" />
+    <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(12,10,9,1) 0%,rgba(12,10,9,0.65) 55%,rgba(12,10,9,0.15) 100%)"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.25em">About MOR SPA 789</p>
+      <h1 class="font-light text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5rem);letter-spacing:-0.02em">Meet Chayanan</h1>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-6 py-20">
+    <div class="grid md:grid-cols-2 gap-20 items-start mb-24">
+      <div>
+        <p class="text-spa-muted leading-relaxed mb-6">
+          Hello and welcome to MOR SPA 789. Chayanan offers home hair dressing and massage treatments from a calm, personal studio in Kenilworth, bringing together more than 19 years of beauty industry experience.
+        </p>
+        <p class="text-spa-muted leading-relaxed mb-6">
+          She specialises in all aspects of men’s and women’s hair styling — from fades to longer mid-length cuts, colouring, perming and styling — alongside authentic Thai massage and holistic treatments designed to support real wellbeing.
+        </p>
+        <p class="text-spa-muted leading-relaxed">
+          The treatment menu is rooted in Thai tradition, enhanced with PAÑPURI Andaman Sails / Scent of Chaya oils from Thailand, and shaped around the belief that every client deserves thoughtful, personalised care.
+        </p>
+
+        <blockquote class="mt-12 pl-6" style="border-left:2px solid #d7b09a">
+          <p class="font-light italic text-spa-text leading-snug" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem">
+            “Every client is different — every treatment is tailored with care, skill and traditional Thai touch.”
+          </p>
+        </blockquote>
+      </div>
+
+      <div>
+        <img src={withBase('/images/studio-products.jpg')} alt="Studio products and books at MOR SPA 789" class="w-full object-cover mb-8" style="aspect-ratio:4/3;border-radius:2px" loading="lazy" />
+        <p class="text-spa-gold text-xs uppercase mb-8 font-medium" style="letter-spacing:0.18em">Practice Highlights</p>
+        <ul class="space-y-5 mb-12">
+          {[
+            'More than 19 years in the beauty industry',
+            'Authentic Thai massage and holistic bodywork',
+            'Men’s and women’s hair styling expertise',
+            'Colouring, perming and occasion hair available',
+            'PAÑPURI Andaman Sails / Scent of Chaya oils from Thailand',
+            'Waxing and personal grooming services',
+            'Daily opening hours from 11AM to 10PM',
+          ].map(cred => (
+            <li class="flex items-start gap-4 pb-5" style="border-bottom:1px solid rgba(215,176,154,0.1)">
+              <svg class="flex-shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle cx="7" cy="7" r="6" stroke="#d7b09a" stroke-width="1"/>
+                <path d="M4 7l2 2 4-4" stroke="#d7b09a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="text-spa-text text-sm">{cred}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="p-8 bg-spa-card" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px">
+          <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.18em">The PAÑPURI Difference</p>
+          <p class="text-spa-muted text-sm leading-relaxed">
+            Chayanan uses her own aromatherapy and massage oil products from PAÑPURI Andaman Sails Thailand, bringing a refined sensory experience to each massage and helping every treatment feel more immersive, luxurious and complete.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center py-12" style="border-top:1px solid rgba(215,176,154,0.15)">
+      <a href={withBase('/contact')} class="inline-block bg-spa-gold text-spa-bg px-10 py-4 text-xs uppercase font-medium hover:opacity-90 transition-opacity" style="letter-spacing:0.18em">
+        Call or Text
+      </a>
+    </div>
+  </div>
+</Layout>

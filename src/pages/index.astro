@@ -1,0 +1,160 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+
+const featuredServices = [
+  {
+    img: withBase('/images/massage-bed.jpg'),
+    label: 'Traditional Thai',
+    title: 'Traditional Thai Massage',
+    desc: 'Powerful, focused bodywork designed to relieve deep-seated muscular stress, stiffness and postural tension.',
+    price: 'From £35',
+  },
+  {
+    img: withBase('/images/massage-treatment.jpg'),
+    label: 'Deep Relief',
+    title: 'Deep Tissue Muscle Massage',
+    desc: 'Targeted work for sore shoulders, tight backs and muscle fatigue, using pressure tailored to the body’s needs.',
+    price: 'From £35',
+  },
+  {
+    img: withBase('/images/thai-decor.jpg'),
+    label: 'PAÑPURI Ritual',
+    title: 'Aromatherapy Massage',
+    desc: 'Personalised Thai aromatherapy using PAÑPURI oils selected to support rest, recovery and emotional balance.',
+    price: 'From £30',
+  },
+];
+---
+<Layout>
+  <Navbar slot="navbar" />
+  <Footer slot="footer" />
+
+  <section class="relative flex items-center justify-center overflow-hidden" style="height:100svh;min-height:680px">
+    <div class="hero-sentinel absolute" style="top:60%;left:0;right:0;height:1px;pointer-events:none" aria-hidden="true"></div>
+    <img src={withBase('/images/room-hero.jpg')} alt="MOR SPA 789 treatment room" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+    <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(12,10,9,0.18) 0%,rgba(12,10,9,0.62) 52%,rgba(12,10,9,1) 100%)"></div>
+
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <p class="text-spa-gold text-xs uppercase mb-8 font-medium" style="letter-spacing:0.25em;font-family:'DM Sans',sans-serif">81 Abbey End · Kenilworth · Open 11AM–10PM Daily</p>
+      <img src={withBase('/images/logo.jpg')} alt="MOR SPA 789 logo" class="mx-auto mb-8 w-32 rounded-md shadow-2xl" />
+      <h1 class="font-light leading-none mb-8 text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,9vw,6.5rem);letter-spacing:-0.02em;line-height:1.04">
+        Authentic Thai Massage<br />&amp; Unisex Hair Styling
+      </h1>
+      <p class="text-spa-muted text-lg mb-12 font-light max-w-3xl mx-auto" style="letter-spacing:0.03em">
+        MOR SPA 789 brings together traditional Thai massage, holistic wellbeing, expert personal grooming and more than 19 years of beauty industry experience in one calm Kenilworth studio.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href={withBase('/services')} class="border border-spa-gold text-spa-gold px-8 py-4 text-xs uppercase font-medium hover:bg-spa-gold hover:text-spa-bg transition-all duration-300" style="letter-spacing:0.18em">
+          Explore Services
+        </a>
+        <a href={withBase('/contact')} class="bg-spa-gold text-spa-bg px-8 py-4 text-xs uppercase font-medium hover:opacity-90 transition-opacity duration-300" style="letter-spacing:0.18em">
+          Call or Text to Book
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-6 py-28 grid md:grid-cols-2 gap-16 items-center">
+    <div>
+      <div class="w-16 h-px bg-spa-gold mb-10"></div>
+      <blockquote class="font-light italic leading-snug text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.7rem)">
+        “Live life by the water — where Thai wisdom, personal care and modern calm meet.”
+      </blockquote>
+    </div>
+    <div>
+      <p class="text-spa-gold text-xs uppercase mb-6 font-medium" style="letter-spacing:0.18em">About MOR SPA 789</p>
+      <p class="text-spa-muted leading-relaxed mb-6">
+        Chayanan welcomes clients for home hair dressing and massage treatments in a warm, private setting. With more than 19 years in the beauty industry, she offers a rare blend of therapeutic bodywork and personalised styling for both men and women.
+      </p>
+      <p class="text-spa-muted leading-relaxed mb-6">
+        The massage menu includes traditional Thai massage, Swedish massage, deep tissue muscle massage, reflexology, herbal compress therapies and focused PAÑPURI express treatments.
+      </p>
+      <p class="text-spa-muted leading-relaxed">
+        Signature aromatherapy rituals use <span class="text-spa-text">PAÑPURI Andaman Sails / Scent of Chaya</span> oils from Thailand to create a more immersive, restorative treatment experience.
+      </p>
+      <a href={withBase('/about')} class="inline-block mt-8 text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.18em;border-bottom:1px solid rgba(215,176,154,0.4);padding-bottom:4px">
+        Learn More →
+      </a>
+    </div>
+  </section>
+
+  <section class="py-24" style="background:rgba(28,25,24,0.55)">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.25em">Signature Treatments</p>
+        <h2 class="font-light text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem)">Restore. Release. Rebalance.</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {featuredServices.map(card => (
+          <article class="group bg-spa-card overflow-hidden transition-all duration-300" style="border:1px solid rgba(215,176,154,0.1);border-radius:2px" onmouseenter="this.style.borderColor='rgba(215,176,154,0.35)'" onmouseleave="this.style.borderColor='rgba(215,176,154,0.1)'">
+            <div class="overflow-hidden" style="aspect-ratio:4/3">
+              <img src={card.img} alt={card.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+            </div>
+            <div class="p-7">
+              <p class="text-spa-gold text-xs uppercase mb-3 font-medium" style="letter-spacing:0.18em">{card.label}</p>
+              <h3 class="text-spa-text mb-3" style="font-family:'Cormorant Garamond',serif;font-size:1.25rem">{card.title}</h3>
+              <p class="text-spa-muted text-sm leading-relaxed mb-5">{card.desc}</p>
+              <p class="text-spa-gold text-sm font-medium" style="letter-spacing:0.05em">{card.price}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="text-center mt-12">
+        <a href={withBase('/services')} class="inline-flex items-center gap-3 text-spa-gold text-xs uppercase font-medium hover:gap-5 transition-all duration-300" style="letter-spacing:0.18em">
+          View All Services
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-6 py-28 grid md:grid-cols-2 gap-16 items-center">
+    <div>
+      <img src={withBase('/images/studio-products.jpg')} alt="Products and studio details at MOR SPA 789" class="w-full object-cover" style="aspect-ratio:4/3;border-radius:2px" loading="lazy" />
+    </div>
+    <div>
+      <p class="text-spa-gold text-xs uppercase mb-6 font-medium" style="letter-spacing:0.25em">Studio Philosophy</p>
+      <h2 class="font-light text-spa-text mb-8" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem)">Personal care with a traditional Thai touch</h2>
+      <div class="w-10 h-px bg-spa-gold mb-8"></div>
+      <p class="text-spa-muted leading-relaxed mb-6">
+        MOR SPA 789 is built around personal attention. Treatments are not rushed, and each session is adapted to the individual — whether the priority is deep muscular release, calm and rest, focused foot therapy or a polished hair refresh.
+      </p>
+      <p class="text-spa-muted leading-relaxed">
+        Alongside massage, clients can also book waxing, men’s and women’s cuts, colouring, restyles, perms and special occasion styling, making the studio a complete beauty and wellbeing destination.
+      </p>
+    </div>
+  </section>
+
+  <section class="bg-spa-elevated py-16" style="border-top:1px solid rgba(215,176,154,0.15);border-bottom:1px solid rgba(215,176,154,0.15)">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-3">
+      {[
+        { num: '11AM–10PM', label: 'Open Daily' },
+        { num: '19+ Years', label: 'Beauty Industry Experience' },
+        { num: 'Kenilworth', label: 'Warwickshire Studio' },
+      ].map((stat, i) => (
+        <div class="text-center px-8 py-4" style={i < 2 ? 'border-right:1px solid rgba(215,176,154,0.15)' : ''}>
+          <p class="text-spa-gold font-light mb-2" style="font-family:'Cormorant Garamond',serif;font-size:1.9rem">{stat.num}</p>
+          <p class="text-spa-muted text-xs uppercase font-medium" style="letter-spacing:0.18em">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="py-32 text-center px-6">
+    <p class="text-spa-gold text-xs uppercase mb-6 font-medium" style="letter-spacing:0.25em">Begin Your Journey</p>
+    <h2 class="font-light text-spa-text mb-8" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem)">Ready to arrange your treatment?</h2>
+    <p class="text-spa-muted max-w-2xl mx-auto mb-12 leading-relaxed">Explore real prices for Thai massage, deep tissue, aromatherapy, hair styling and holistic treatments — then call or text MOR SPA 789 directly to arrange a time.</p>
+    <a href={withBase('/contact')} class="inline-block bg-spa-gold text-spa-bg px-10 py-4 text-xs uppercase font-medium hover:opacity-90 transition-opacity duration-300" style="letter-spacing:0.18em">
+      View Contact Details
+    </a>
+  </section>
+</Layout>
