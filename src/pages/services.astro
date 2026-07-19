@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
@@ -6,252 +6,472 @@ import Footer from '../components/Footer.astro';
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
+const signatureRituals = [
+  {
+    name: 'The Restore',
+    duration: '90 minutes',
+    price: '£80',
+    composition: 'Traditional Thai Massage (60 min) + Shoulder, Face & Scalp Treatment (30 min)',
+    desc: 'Deep muscular release from body to crown. Chronic tension unravels in full — then the jaw, scalp and temples follow. The complete reset, in a single appointment.',
+    tag: 'Most Requested',
+    saving: 'Save £10 vs individual',
+  },
+  {
+    name: 'The Sanctuary',
+    duration: '120 minutes',
+    price: '£95',
+    composition: 'PAÑPURI Aromatherapy Massage (90 min) + Indian Head Massage (30 min)',
+    desc: 'Pure surrender. Thai aromatherapy oils drawn across the whole body, followed by ancient Ayurvedic work across the head and crown. Scent, warmth and tradition in complete, unhurried harmony.',
+    tag: 'Signature',
+    saving: 'Save £5 vs individual',
+  },
+  {
+    name: 'The Full Release',
+    duration: '120 minutes',
+    price: '£100',
+    composition: 'Deep Tissue Muscle Massage (90 min) + Reflexology Foot Massage (30 min)',
+    desc: 'For those who carry tension everywhere — addressed completely. Sustained deep-tissue work frees the body\'s deepest holdings; reflexology completes the circuit from the ground up.',
+    tag: 'Intense',
+    saving: 'Save £10 vs individual',
+  },
+];
+
+const massageTreatments = [
+  {
+    title: 'Traditional Thai Massage',
+    tag: 'Signature Treatment',
+    pricing: [{ time: '30 mins', price: '£35' }, { time: '60 mins', price: '£55' }, { time: '90 mins', price: '£75' }],
+    desc: 'Rooted in centuries of Thai healing tradition, this powerful full-body treatment works along the body\'s natural energy lines — dissolving chronic tension, restoring ease of movement and leaving muscles lighter, freer and deeply released. No oils. Pure pressure, rhythm and intention.',
+    img: withBase('/images/massage-bed.jpg'),
+    imgAlt: 'Traditional Thai Massage at MOR SPA 789',
+    reverse: false,
+  },
+  {
+    title: 'Deep Tissue Muscle Massage',
+    tag: 'Therapeutic',
+    pricing: [{ time: '30 mins', price: '£35' }, { time: '60 mins', price: '£55' }, { time: '90 mins', price: '£75' }],
+    desc: 'For those who carry their stress beneath the surface. Deliberate, sustained pressure reaches into the deeper muscle layers — addressing chronic knots, stubborn tightness and tension that ordinary massage cannot reach. Pressure is always discussed and adapted to your individual tolerance.',
+    img: withBase('/images/massage-treatment.jpg'),
+    imgAlt: 'Deep Tissue Massage at MOR SPA 789',
+    reverse: true,
+  },
+  {
+    title: 'Swedish Massage',
+    tag: 'Classic',
+    pricing: [{ time: '30 mins', price: '£35' }, { time: '60 mins', price: '£55' }, { time: '90 mins', price: '£75' }],
+    desc: 'The classic in its purest form. Long, considered strokes and carefully calibrated pressure ease muscle tension, encourage circulation and guide the body into a state of genuine, unhurried rest. The ideal introduction — and an enduring choice for those who know precisely what they need.',
+    img: withBase('/images/treatment-room.jpg'),
+    imgAlt: 'Swedish Massage at MOR SPA 789',
+    reverse: false,
+  },
+];
+
+const aromaTreatments = [
+  {
+    title: 'Aromatherapy Massage',
+    label: 'PAÑPURI Ritual',
+    pricing: [{ time: '30 mins', price: '£30' }, { time: '60 mins', price: '£50' }, { time: '90 mins', price: '£70' }],
+    desc: 'Where therapeutic touch meets the art of scent. PAÑPURI aromatherapy blends — individually chosen in a brief consultation before every session — transform a massage into a fully sensory ritual. Warmth, pressure and fragrance working in concert, for results that reach well beyond the physical.',
+    img: withBase('/images/thai-decor.jpg'),
+  },
+  {
+    title: 'Ultimate Aromatherapy Massage',
+    label: 'Enhanced PAÑPURI Experience',
+    pricing: [{ time: '30 mins', price: '£35' }, { time: '60 mins', price: '£55' }, { time: '90 mins', price: '£75' }],
+    desc: 'The elevated aromatherapy ritual. A more immersive, enveloping treatment for those who want to surrender completely — more time, deeper application, a more profound sense of dissolution. Surface wholly transformed.',
+    img: withBase('/images/studio-products.jpg'),
+  },
+];
+
 const expressTreatments = [
   {
     title: 'Shoulder, Face & Scalp Treatment',
-    time: '30 mins · £35',
-    desc: 'A focused PAÑPURI express treatment designed to ease tightness around the upper body, soften stress and leave you feeling lighter.',
+    time: '30 mins',
+    price: '£35',
+    desc: 'Tension accumulates quietly — in the jaw, the temples, behind the eyes, at the base of the skull. This focused ritual works precisely where it collects, softening stress lines and restoring a remarkable sense of crown-to-shoulder lightness in just thirty minutes.',
   },
   {
     title: 'Back, Neck & Shoulder Treatment',
-    time: '30 mins · £35',
-    desc: 'A targeted express massage for the body’s most overworked areas, ideal when you need effective relief in a shorter appointment.',
+    time: '30 mins',
+    price: '£35',
+    desc: 'The body\'s most overworked triangle, addressed with purpose and precision. Effective, targeted relief for the areas that bear the heaviest daily load — ideal between fuller appointments, or whenever the need for clarity is immediate.',
   },
 ];
 
 const holisticTreatments = [
   {
     title: 'Indian Head Massage',
-    time: '30 mins · £30',
-    desc: 'Based on ancient Ayurvedic techniques, this treatment releases tension and helps rebalance the mind.',
+    pricing: '30 mins · £30',
+    desc: 'Drawn from centuries of Ayurvedic practice, this treatment addresses the head, neck and upper shoulder meridians where stress most tenaciously collects. A ritual that works on the mind as profoundly as the body — you emerge clearer, stiller, genuinely recalibrated.',
     img: withBase('/images/angkor-art.jpg'),
   },
   {
     title: 'Reflexology Foot Massage',
-    time: '30 mins · £35 / 60 mins · £55',
-    desc: 'A grounding foot therapy that supports the body’s natural ability to heal itself while restoring balance and harmony.',
+    pricing: '30 mins · £35 · 60 mins · £55',
+    desc: 'The feet hold the map of the whole body. This grounding therapy works with reflex zones corresponding to organs and systems throughout — stimulating the body\'s own capacity to restore equilibrium, encourage circulation and release tension held far from the point of contact.',
     img: withBase('/images/studio-products.jpg'),
   },
   {
     title: 'Herbal Compress Sapaya Massage',
-    time: '60 mins · £60 / 90 mins · £80',
-    desc: 'A traditional Thai ritual using steamed herb compresses to deliver moist heat through skin and tissue, easing soreness and tension.',
+    pricing: '60 mins · £60 · 90 mins · £80',
+    desc: 'A traditional Thai ritual of moist heat and botanical medicine. Steamed compresses packed with lemongrass, ginger and kaffir lime are pressed into skin and tissue — delivering warmth, ancient remedy and the unmistakable, transporting fragrance of the East.',
     img: withBase('/images/thai-decor.jpg'),
   },
 ];
 
-const hairServices = [
-  { title: 'Men’s Haircut — £14', desc: 'Classic cut tailored to head shape, finish and everyday wearability.' },
-  { title: 'Buzz Cut — £10', desc: 'Clean, quick and tidy close-cut service.' },
-  { title: 'Elder Gent’s Cut — £11', desc: 'Comfortable, considered service for older gentlemen.' },
-  { title: 'Cut and Trim for Kids — £10', desc: 'Simple, friendly trims for younger clients.' },
-  { title: 'Beard Cut — £5', desc: 'Quick beard shaping and tidy-up.' },
-  { title: 'Colouring, restyles, blowdries, occasions & perms', desc: 'Additional women’s and unisex hair services are available, including highlights, lowlights, balayage, bridal/special occasion styling and perms. Fine-tune these prices later if needed.' },
+const waxingServices = [
+  { title: 'Back Wax', price: 'From £15' },
+  { title: 'Chest Wax', price: 'From £12' },
+  { title: 'Half Leg Wax', price: 'From £12' },
+  { title: 'Underarm Wax', price: '£8' },
+  { title: 'Eyebrow Tidy', price: '£8' },
+  { title: 'Lip Wax', price: '£5' },
+];
+
+const hairMen = [
+  { title: 'Men\'s Haircut', price: '£14', desc: 'A precise, considered cut tailored to head shape, face structure and everyday wearability. Consistently impeccable.' },
+  { title: 'Buzz Cut', price: '£10', desc: 'Clean edges, close finish. Fast, reliable and unfailingly sharp.' },
+  { title: 'Elder Gentleman\'s Cut', price: '£11', desc: 'An unhurried, carefully considered service with the time and attention a seasoned client deserves.' },
+  { title: 'Beard Shaping', price: '£5', desc: 'Defined lines, clean finish. Precision trimming that properly frames the face.' },
+];
+
+const hairChildren = [
+  { title: 'Children\'s Cut & Trim', price: '£10', desc: 'Simple, friendly and efficient — results that parents and children both leave happy with.' },
+];
+
+const hairWomen = [
+  { title: 'Blowdry & Finish', price: 'From £20', desc: 'A polished, lasting finish adapted to hair type and occasion.' },
+  { title: 'Cut & Blowdry', price: 'From £35', desc: 'A considered restyle or maintenance trim with a refined, lasting finish.' },
+  { title: 'Colour, Highlights & Balayage', price: 'On Consultation', desc: 'Full colour, highlights, lowlights, balayage and toning — each tailored in personal consultation.' },
+  { title: 'Perms & Restyles', price: 'On Consultation', desc: 'Structural transformations: perms, relaxers and significant changes in length, texture or direction.' },
+  { title: 'Bridal & Occasion Styling', price: 'On Consultation', desc: 'Upstyles, waves and sophisticated finishing for weddings, events and every milestone worth marking.' },
+];
+
+const categoryNav = [
+  { label: 'Packages', tab: 'signature' },
+  { label: 'Massage', tab: 'massage' },
+  { label: 'Aromatherapy', tab: 'aromatherapy' },
+  { label: 'Express', tab: 'express' },
+  { label: 'Holistic', tab: 'holistic' },
+  { label: 'Grooming', tab: 'grooming' },
+  { label: 'Hair', tab: 'hair' },
 ];
 ---
-<Layout title="Services & Pricing | MOR SPA 789">
+<Layout title="Treatments & Pricing | MOR SPA 789">
   <Navbar slot="navbar" />
   <Footer slot="footer" />
 
-  <section class="relative flex items-end overflow-hidden" style="height:55vh;min-height:420px;padding-bottom:5rem">
+  <!-- Hero -->
+  <section class="relative flex items-end overflow-hidden" style="height:62vh;min-height:480px;padding-bottom:5rem">
     <div class="hero-sentinel absolute" style="top:50%;left:0;right:0;height:1px;pointer-events:none" aria-hidden="true"></div>
     <img src={withBase('/images/treatment-room.jpg')} alt="Treatment room at MOR SPA 789" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
-    <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(12,10,9,1) 0%,rgba(12,10,9,0.64) 55%,rgba(12,10,9,0.15) 100%)"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(12,10,9,1) 0%,rgba(12,10,9,0.65) 52%,rgba(12,10,9,0.1) 100%)"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-6">
-      <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.25em">Book Online Inspired Pricing</p>
-      <h1 class="font-light text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5rem);letter-spacing:-0.02em">Our Treatments</h1>
+      <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.25em">Kenilworth · Open Daily 11AM–8PM · By Appointment</p>
+      <h1 class="font-light text-spa-text mb-5" style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5rem);letter-spacing:-0.02em;line-height:1.05">Treatments &amp; Pricing</h1>
+      <p class="text-spa-muted max-w-lg" style="line-height:1.85;font-size:1rem">Every treatment is personalised. Every appointment, unhurried. I work with each client individually — adapting pressure, pace and product to exactly what the body needs that day.</p>
     </div>
   </section>
 
-  <div class="max-w-7xl mx-auto px-6 py-20">
-    <section class="mb-24">
-      <div class="flex items-center gap-6 mb-14">
-        <div class="w-10 h-px bg-spa-gold flex-shrink-0"></div>
-        <p class="text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.25em">Massage Treatments</p>
-      </div>
+  <!-- Sticky category navigation -->
+  <nav aria-label="Treatment categories" class="sticky z-30 overflow-x-auto" style="top:4.5rem;background:rgba(12,10,9,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(215,176,154,0.12)">
+    <div class="max-w-7xl mx-auto px-6 flex">
+      {categoryNav.map(item => (
+        <button
+          data-tab={item.tab}
+          class="tab-link py-4 px-5 text-xs uppercase font-medium text-spa-muted hover:text-spa-gold transition-colors duration-200 whitespace-nowrap cursor-pointer"
+          style="letter-spacing:0.2em;background:none;border:none;border-bottom:2px solid transparent;outline:none"
+        >{item.label}</button>
+      ))}
+    </div>
+  </nav>
 
-      <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
-        <div>
-          <img src={withBase('/images/massage-bed.jpg')} alt="Traditional Thai Massage" class="w-full object-cover" style="aspect-ratio:16/10;border-radius:2px" loading="lazy" />
-        </div>
-        <div>
-          <h2 class="font-light text-spa-text mb-5" style="font-family:'Cormorant Garamond',serif;font-size:1.95rem">Traditional Thai Massage</h2>
-          <p class="text-spa-muted leading-relaxed mb-8">A powerful massage designed to alleviate deep-seated tension and muscular stress. Specialised techniques focus on areas of concern and common discomforts such as stiff necks, sore shoulders and lower back pain.</p>
-          <div style="border:1px solid rgba(215,176,154,0.2);padding:1.5rem;border-radius:2px">
-            <p class="text-spa-gold text-xs uppercase mb-5 font-medium" style="letter-spacing:0.18em">Pricing</p>
-            <div class="grid grid-cols-3 text-center">
-              {[{ time: '30 mins', price: '£35' }, { time: '60 mins', price: '£55' }, { time: '90 mins', price: '£75' }].map((p, i) => (
-                <div class="py-3" style={i < 2 ? 'border-right:1px solid rgba(215,176,154,0.15)' : ''}>
-                  <p class="text-spa-gold font-light" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem">{p.price}</p>
-                  <p class="text-spa-muted text-xs mt-1">{p.time}</p>
-                </div>
-              ))}
+  <div class="max-w-7xl mx-auto px-6 py-24">
+
+    <!-- Signature Rituals -->
+    <section class="mb-32 tab-section" id="signature" data-tab-section>
+      <div class="text-center mb-16">
+        <p class="text-spa-gold text-xs uppercase mb-3 font-medium" style="letter-spacing:0.28em">Curated Experiences</p>
+        <h2 class="font-light text-spa-text mb-6" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem)">Signature Rituals</h2>
+        <p class="text-spa-muted max-w-xl mx-auto" style="line-height:1.85">Thoughtfully composed treatments that go beyond a single service. Each pairing is designed to address body and mind in full — and at a saving on individual prices.</p>
+      </div>
+      <div class="grid md:grid-cols-3" style="border:1px solid rgba(215,176,154,0.12)">
+        {signatureRituals.map((pkg, i) => (
+          <div
+            class="p-10 flex flex-col transition-colors duration-300"
+            style={`border-right:${i < 2 ? '1px solid rgba(215,176,154,0.12)' : 'none'}`}
+            onmouseenter="this.style.background='rgba(28,25,24,0.8)'"
+            onmouseleave="this.style.background='transparent'"
+          >
+            <p class="text-spa-gold text-xs uppercase mb-7 font-medium" style="letter-spacing:0.24em">{pkg.tag}</p>
+            <h3 class="font-light text-spa-text mb-1" style="font-family:'Cormorant Garamond',serif;font-size:2rem;line-height:1.1">{pkg.name}</h3>
+            <p class="text-spa-gold mb-1" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem">{pkg.price}</p>
+            <p class="text-spa-muted text-xs mb-1">{pkg.duration}</p>
+            <p class="text-spa-muted text-xs mb-7 italic">{pkg.saving}</p>
+            <div class="w-8 h-px mb-6" style="background:rgba(215,176,154,0.25)"></div>
+            <p class="text-spa-muted text-xs leading-relaxed mb-5 font-medium uppercase" style="letter-spacing:0.12em">{pkg.composition}</p>
+            <p class="text-spa-muted text-sm leading-relaxed flex-1" style="line-height:1.8">{pkg.desc}</p>
+            <div class="mt-10 pt-6" style="border-top:1px solid rgba(215,176,154,0.12)">
+              <a href={withBase('/contact')} class="text-spa-gold text-xs uppercase font-medium hover:opacity-60 transition-opacity" style="letter-spacing:0.22em">Enquire to Book →</a>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
-        <div class="md:order-2">
-          <img src={withBase('/images/massage-treatment.jpg')} alt="Deep tissue massage treatment" class="w-full object-cover" style="aspect-ratio:16/10;border-radius:2px" loading="lazy" />
-        </div>
-        <div class="md:order-1">
-          <h2 class="font-light text-spa-text mb-5" style="font-family:'Cormorant Garamond',serif;font-size:1.95rem">Deep Tissue Muscle Massage</h2>
-          <p class="text-spa-muted leading-relaxed mb-8">A focused treatment for chronic tightness, muscular fatigue and tension build-up. Pressure and pace are adjusted to your tolerance, making this ideal for clients who need stronger work.</p>
-          <div style="border:1px solid rgba(215,176,154,0.2);padding:1.5rem;border-radius:2px">
-            <p class="text-spa-gold text-xs uppercase mb-5 font-medium" style="letter-spacing:0.18em">Pricing</p>
-            <div class="grid grid-cols-3 text-center">
-              {[{ time: '30 mins', price: '£35' }, { time: '60 mins', price: '£55' }, { time: '90 mins', price: '£75' }].map((p, i) => (
-                <div class="py-3" style={i < 2 ? 'border-right:1px solid rgba(215,176,154,0.15)' : ''}>
-                  <p class="text-spa-gold font-light" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem">{p.price}</p>
-                  <p class="text-spa-muted text-xs mt-1">{p.time}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
-        <div>
-          <img src={withBase('/images/treatment-room.jpg')} alt="Swedish massage room" class="w-full object-cover" style="aspect-ratio:16/10;border-radius:2px" loading="lazy" />
-        </div>
-        <div>
-          <h2 class="font-light text-spa-text mb-5" style="font-family:'Cormorant Garamond',serif;font-size:1.95rem">Swedish Massage</h2>
-          <p class="text-spa-muted leading-relaxed mb-8">A traditional full body massage using firm pressure to promote relaxation and ease muscle tension. This is an excellent introduction massage and ideal for those wanting a calm, restorative treatment.</p>
-          <div style="border:1px solid rgba(215,176,154,0.2);padding:1.5rem;border-radius:2px">
-            <p class="text-spa-gold text-xs uppercase mb-5 font-medium" style="letter-spacing:0.18em">Pricing</p>
-            <div class="grid grid-cols-3 text-center">
-              {[{ time: '30 mins', price: '£35' }, { time: '60 mins', price: '£55' }, { time: '90 mins', price: '£75' }].map((p, i) => (
-                <div class="py-3" style={i < 2 ? 'border-right:1px solid rgba(215,176,154,0.15)' : ''}>
-                  <p class="text-spa-gold font-light" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem">{p.price}</p>
-                  <p class="text-spa-muted text-xs mt-1">{p.time}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-spa-card p-10 mb-6" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px">
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.18em">PAÑPURI Ritual</p>
-            <h2 class="font-light text-spa-text mb-5" style="font-family:'Cormorant Garamond',serif;font-size:1.95rem">Aromatherapy Massage</h2>
-            <p class="text-spa-muted leading-relaxed mb-6">PAÑPURI aromatherapy massage uses individually chosen oils to suit your body and mood. A personal consultation ensures the treatment is truly tailored.</p>
-            <div class="grid grid-cols-3 text-center" style="border-top:1px solid rgba(215,176,154,0.15);padding-top:1.5rem">
-              {[{ time: '30 mins', price: '£30' }, { time: '60 mins', price: '£50' }, { time: '90 mins', price: '£70' }].map((p, i) => (
-                <div class="py-2" style={i < 2 ? 'border-right:1px solid rgba(215,176,154,0.15)' : ''}>
-                  <p class="text-spa-gold font-light" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem">{p.price}</p>
-                  <p class="text-spa-muted text-xs mt-1">{p.time}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <img src={withBase('/images/thai-decor.jpg')} alt="PAÑPURI aromatherapy oils and decor" class="w-full object-cover" style="aspect-ratio:4/3;border-radius:2px" loading="lazy" />
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-spa-card p-10" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px">
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.18em">Enhanced Aromatherapy</p>
-            <h2 class="font-light text-spa-text mb-5" style="font-family:'Cormorant Garamond',serif;font-size:1.95rem">Ultimate Aromatherapy Massage</h2>
-            <p class="text-spa-muted leading-relaxed mb-6">A more indulgent aromatherapy ritual for clients wanting deeper relaxation and a more immersive oil-based treatment.</p>
-            <div class="grid grid-cols-3 text-center" style="border-top:1px solid rgba(215,176,154,0.15);padding-top:1.5rem">
-              {[{ time: '30 mins', price: '£35' }, { time: '60 mins', price: '£55' }, { time: '90 mins', price: '£75' }].map((p, i) => (
-                <div class="py-2" style={i < 2 ? 'border-right:1px solid rgba(215,176,154,0.15)' : ''}>
-                  <p class="text-spa-gold font-light" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem">{p.price}</p>
-                  <p class="text-spa-muted text-xs mt-1">{p.time}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <img src={withBase('/images/studio-products.jpg')} alt="Studio products at MOR SPA 789" class="w-full object-cover" style="aspect-ratio:4/3;border-radius:2px" loading="lazy" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="mb-24">
-      <div class="flex items-center gap-6 mb-14">
-        <div class="w-10 h-px bg-spa-gold flex-shrink-0"></div>
-        <p class="text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.25em">PAÑPURI Express</p>
-      </div>
-      <div class="grid md:grid-cols-2 gap-6">
-        {expressTreatments.map(t => (
-          <div class="bg-spa-card p-8 transition-colors" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px" onmouseenter="this.style.borderColor='rgba(215,176,154,0.35)'" onmouseleave="this.style.borderColor='rgba(215,176,154,0.15)'">
-            <p class="text-spa-gold text-xs uppercase mb-3 font-medium" style="letter-spacing:0.18em">{t.time}</p>
-            <h3 class="font-light text-spa-text mb-4" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem">{t.title}</h3>
-            <p class="text-spa-muted text-sm leading-relaxed">{t.desc}</p>
           </div>
         ))}
       </div>
     </section>
 
-    <section class="mb-24">
-      <div class="flex items-center gap-6 mb-14">
+    <!-- Massage Treatments -->
+    <section class="mb-32 tab-section" id="massage" data-tab-section>
+      <div class="flex items-center gap-6 mb-16">
+        <div class="w-10 h-px bg-spa-gold flex-shrink-0"></div>
+        <p class="text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.25em">Massage Treatments</p>
+      </div>
+      {massageTreatments.map((t, i) => (
+        <div
+          class={`grid md:grid-cols-2 gap-14 items-center ${i < massageTreatments.length - 1 ? 'mb-24 pb-24' : 'mb-6'}`}
+          style={i < massageTreatments.length - 1 ? 'border-bottom:1px solid rgba(215,176,154,0.08)' : ''}
+        >
+          <div class={t.reverse ? 'md:order-2' : ''}>
+            <img src={t.img} alt={t.imgAlt} class="w-full object-cover" style="aspect-ratio:16/10;border-radius:2px" loading="lazy" />
+          </div>
+          <div class={t.reverse ? 'md:order-1' : ''}>
+            <p class="text-spa-gold text-xs uppercase mb-3 font-medium" style="letter-spacing:0.22em">{t.tag}</p>
+            <h2 class="font-light text-spa-text mb-5" style="font-family:'Cormorant Garamond',serif;font-size:2rem;line-height:1.1">{t.title}</h2>
+            <p class="text-spa-muted leading-relaxed mb-10" style="line-height:1.85">{t.desc}</p>
+            <div style="border:1px solid rgba(215,176,154,0.18);border-radius:2px">
+              <p class="text-spa-gold text-xs uppercase font-medium px-6 pt-5 pb-4" style="letter-spacing:0.2em;border-bottom:1px solid rgba(215,176,154,0.1)">Pricing</p>
+              <div class="grid grid-cols-3 text-center">
+                {t.pricing.map((p, pi) => (
+                  <div class="py-4" style={pi < 2 ? 'border-right:1px solid rgba(215,176,154,0.12)' : ''}>
+                    <p class="text-spa-gold font-light" style="font-family:'Cormorant Garamond',serif;font-size:1.4rem">{p.price}</p>
+                    <p class="text-spa-muted text-xs mt-1.5">{p.time}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <!-- PAÑPURI Aromatherapy -->
+    <section class="mb-32 tab-section" id="aromatherapy" data-tab-section>
+      <div class="flex items-center gap-6 mb-5">
+        <div class="w-10 h-px bg-spa-gold flex-shrink-0"></div>
+        <p class="text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.25em">PAÑPURI Aromatherapy</p>
+      </div>
+      <p class="text-spa-muted mb-14 max-w-xl" style="line-height:1.85;padding-left:calc(2.5rem + 1.5rem)">PAÑPURI is a luxury Thai wellness brand whose oils — including the iconic Andaman Sails and Scent of Chaya — form the foundation of every aromatherapy treatment here. Oils are chosen in brief consultation before each session.</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        {aromaTreatments.map(t => (
+          <div class="flex flex-col" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px">
+            <div class="overflow-hidden" style="aspect-ratio:16/8">
+              <img src={t.img} alt={t.title} class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+            </div>
+            <div class="p-9 flex flex-col flex-1">
+              <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.22em">{t.label}</p>
+              <h2 class="font-light text-spa-text mb-5" style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;line-height:1.1">{t.title}</h2>
+              <p class="text-spa-muted leading-relaxed mb-8 flex-1" style="line-height:1.85">{t.desc}</p>
+              <div class="grid grid-cols-3 text-center" style="border-top:1px solid rgba(215,176,154,0.12);padding-top:1.5rem">
+                {t.pricing.map((p, pi) => (
+                  <div class="py-2" style={pi < 2 ? 'border-right:1px solid rgba(215,176,154,0.12)' : ''}>
+                    <p class="text-spa-gold font-light" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem">{p.price}</p>
+                    <p class="text-spa-muted text-xs mt-1.5">{p.time}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Express Treatments -->
+    <section class="mb-32 tab-section" id="express" data-tab-section>
+      <div class="flex items-center gap-6 mb-5">
+        <div class="w-10 h-px bg-spa-gold flex-shrink-0"></div>
+        <p class="text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.25em">PAÑPURI Express</p>
+      </div>
+      <p class="text-spa-muted mb-14 max-w-xl" style="line-height:1.85;padding-left:calc(2.5rem + 1.5rem)">Focused, purposeful treatments in thirty minutes. For those who understand that precision matters more than duration — and that targeted work, done properly, is transformative.</p>
+      <div class="grid md:grid-cols-2 gap-5">
+        {expressTreatments.map(t => (
+          <div class="p-8 transition-colors duration-200" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px" onmouseenter="this.style.borderColor='rgba(215,176,154,0.35)'" onmouseleave="this.style.borderColor='rgba(215,176,154,0.15)'">
+            <div class="flex justify-between items-start gap-6 mb-5">
+              <div>
+                <h3 class="font-light text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:1.55rem;line-height:1.15">{t.title}</h3>
+                <p class="text-spa-muted text-xs mt-2 uppercase" style="letter-spacing:0.15em">{t.time}</p>
+              </div>
+              <p class="text-spa-gold font-light flex-shrink-0" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem">{t.price}</p>
+            </div>
+            <div class="w-6 h-px mb-5" style="background:rgba(215,176,154,0.2)"></div>
+            <p class="text-spa-muted text-sm leading-relaxed" style="line-height:1.8">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Holistic Treatments -->
+    <section class="mb-32 tab-section" id="holistic" data-tab-section>
+      <div class="flex items-center gap-6 mb-5">
         <div class="w-10 h-px bg-spa-gold flex-shrink-0"></div>
         <p class="text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.25em">Holistic Treatments</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
+      <p class="text-spa-muted mb-14 max-w-xl" style="line-height:1.85;padding-left:calc(2.5rem + 1.5rem)">Ancient practices from Thailand and India — adapted for modern bodies carrying modern stress. Each treatment works with the body's own systems to restore what daily life depletes.</p>
+      <div class="grid md:grid-cols-3 gap-5">
         {holisticTreatments.map(t => (
-          <div class="bg-spa-card overflow-hidden group transition-colors" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px" onmouseenter="this.style.borderColor='rgba(215,176,154,0.35)'" onmouseleave="this.style.borderColor='rgba(215,176,154,0.15)'">
+          <div class="bg-spa-card overflow-hidden group" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px;transition:border-color 0.2s" onmouseenter="this.style.borderColor='rgba(215,176,154,0.35)'" onmouseleave="this.style.borderColor='rgba(215,176,154,0.15)'">
             <div class="overflow-hidden" style="aspect-ratio:4/3">
               <img src={t.img} alt={t.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
             </div>
             <div class="p-7">
-              <p class="text-spa-gold text-xs uppercase mb-3 font-medium" style="letter-spacing:0.15em">{t.time}</p>
-              <h3 class="font-light text-spa-text mb-4" style="font-family:'Cormorant Garamond',serif;font-size:1.25rem">{t.title}</h3>
-              <p class="text-spa-muted text-sm leading-relaxed">{t.desc}</p>
+              <p class="text-spa-gold text-xs uppercase mb-3 font-medium" style="letter-spacing:0.15em">{t.pricing}</p>
+              <h3 class="font-light text-spa-text mb-4" style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;line-height:1.2">{t.title}</h3>
+              <p class="text-spa-muted text-sm leading-relaxed" style="line-height:1.8">{t.desc}</p>
             </div>
           </div>
         ))}
       </div>
     </section>
 
-    <section class="mb-24">
-      <div class="flex items-center gap-6 mb-14">
+    <!-- Waxing & Grooming -->
+    <section class="mb-32 tab-section" id="grooming" data-tab-section>
+      <div class="flex items-center gap-6 mb-5">
         <div class="w-10 h-px bg-spa-gold flex-shrink-0"></div>
-        <p class="text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.25em">Waxing & Personal Grooming</p>
+        <p class="text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.25em">Waxing &amp; Personal Grooming</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-4">
-        {['Back Wax', 'Chest Wax', 'Eyebrow Tidy'].map(item => (
-          <div class="p-6 bg-spa-card" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px">
-            <p class="text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:1.25rem">{item}</p>
-            <p class="text-spa-muted text-sm mt-2">Placeholder price — edit to suit.</p>
+      <p class="text-spa-muted mb-14 max-w-xl" style="line-height:1.85;padding-left:calc(2.5rem + 1.5rem)">Clean, precise and quietly confident. Grooming services are available for both men and women, and can be combined with any massage appointment in the same session.</p>
+      <div class="grid md:grid-cols-3 gap-3">
+        {waxingServices.map(w => (
+          <div
+            class="px-6 py-5 flex justify-between items-center transition-colors duration-200"
+            style="border:1px solid rgba(215,176,154,0.15);border-radius:2px"
+            onmouseenter="this.style.borderColor='rgba(215,176,154,0.3)'"
+            onmouseleave="this.style.borderColor='rgba(215,176,154,0.15)'"
+          >
+            <p class="text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:1.2rem">{w.title}</p>
+            <p class="text-spa-gold text-sm font-medium flex-shrink-0 ml-4">{w.price}</p>
           </div>
         ))}
       </div>
     </section>
 
-    <section class="mb-24">
-      <div class="flex items-center gap-6 mb-14">
+    <!-- Hair Services -->
+    <section class="mb-24 tab-section" id="hair" data-tab-section>
+      <div class="flex items-center gap-6 mb-5">
         <div class="w-10 h-px bg-spa-gold flex-shrink-0"></div>
         <p class="text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.25em">Hair Services</p>
       </div>
-      <p class="text-spa-muted mb-10 max-w-2xl">Annie specialises in all aspects of men’s and women’s hair styling — from fades to longer cuts, colouring, perming and occasion styling.</p>
-      <div class="grid md:grid-cols-2 gap-4">
-        {hairServices.map(h => (
-          <div class="flex gap-5 items-start p-6 transition-colors" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px" onmouseenter="this.style.borderColor='rgba(215,176,154,0.35)'" onmouseleave="this.style.borderColor='rgba(215,176,154,0.15)'">
-            <div class="w-1.5 h-1.5 rounded-full bg-spa-gold flex-shrink-0 mt-2"></div>
-            <div>
-              <h3 class="font-light text-spa-text mb-2" style="font-family:'Cormorant Garamond',serif;font-size:1.15rem">{h.title}</h3>
-              <p class="text-spa-muted text-sm">{h.desc}</p>
+      <p class="text-spa-muted mb-16 max-w-xl" style="line-height:1.85;padding-left:calc(2.5rem + 1.5rem)">I hold more than 19 years of professional expertise across all aspects of men's and women's hair — from precision cuts and fades to colour, perming and occasion styling. Every service is personal, unhurried and adapted to the individual.</p>
+
+      <div class="mb-12">
+        <p class="text-spa-muted text-xs uppercase mb-6 tracking-widest font-medium pl-1">Men</p>
+        <div class="grid md:grid-cols-2 gap-3">
+          {hairMen.map(h => (
+            <div
+              class="flex justify-between items-start px-6 py-5 transition-colors duration-200"
+              style="border:1px solid rgba(215,176,154,0.12);border-radius:2px"
+              onmouseenter="this.style.borderColor='rgba(215,176,154,0.3)'"
+              onmouseleave="this.style.borderColor='rgba(215,176,154,0.12)'"
+            >
+              <div class="pr-6 flex-1">
+                <h3 class="font-light text-spa-text mb-1" style="font-family:'Cormorant Garamond',serif;font-size:1.15rem">{h.title}</h3>
+                <p class="text-spa-muted text-xs leading-relaxed" style="line-height:1.7">{h.desc}</p>
+              </div>
+              <p class="text-spa-gold font-medium text-sm flex-shrink-0 mt-0.5">{h.price}</p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
+
+      <div class="mb-12">
+        <p class="text-spa-muted text-xs uppercase mb-6 tracking-widest font-medium pl-1">Children</p>
+        <div class="grid md:grid-cols-2 gap-3">
+          {hairChildren.map(h => (
+            <div
+              class="flex justify-between items-start px-6 py-5 transition-colors duration-200"
+              style="border:1px solid rgba(215,176,154,0.12);border-radius:2px"
+              onmouseenter="this.style.borderColor='rgba(215,176,154,0.3)'"
+              onmouseleave="this.style.borderColor='rgba(215,176,154,0.12)'"
+            >
+              <div class="pr-6 flex-1">
+                <h3 class="font-light text-spa-text mb-1" style="font-family:'Cormorant Garamond',serif;font-size:1.15rem">{h.title}</h3>
+                <p class="text-spa-muted text-xs leading-relaxed" style="line-height:1.7">{h.desc}</p>
+              </div>
+              <p class="text-spa-gold font-medium text-sm flex-shrink-0 mt-0.5">{h.price}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p class="text-spa-muted text-xs uppercase mb-6 tracking-widest font-medium pl-1">Women</p>
+        <div class="grid md:grid-cols-2 gap-3">
+          {hairWomen.map(h => (
+            <div
+              class="flex justify-between items-start px-6 py-5 transition-colors duration-200"
+              style="border:1px solid rgba(215,176,154,0.12);border-radius:2px"
+              onmouseenter="this.style.borderColor='rgba(215,176,154,0.3)'"
+              onmouseleave="this.style.borderColor='rgba(215,176,154,0.12)'"
+            >
+              <div class="pr-6 flex-1">
+                <h3 class="font-light text-spa-text mb-1" style="font-family:'Cormorant Garamond',serif;font-size:1.15rem">{h.title}</h3>
+                <p class="text-spa-muted text-xs leading-relaxed" style="line-height:1.7">{h.desc}</p>
+              </div>
+              <p class="text-spa-gold text-sm flex-shrink-0 mt-0.5 text-right" style="min-width:5.5rem">{h.price}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 
-    <div class="text-center py-16" style="border-top:1px solid rgba(215,176,154,0.15)">
-      <p class="text-spa-muted mb-6">Ready to arrange your treatment?</p>
-      <a href={withBase('/contact')} class="inline-block bg-spa-gold text-spa-bg px-10 py-4 text-xs uppercase font-medium hover:opacity-90 transition-opacity" style="letter-spacing:0.18em">
-        Call or Text
+    <!-- CTA -->
+    <div class="text-center py-20" style="border-top:1px solid rgba(215,176,154,0.12)">
+      <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.28em">By Appointment Only</p>
+      <h2 class="font-light text-spa-text mb-5" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem)">Reserve your treatment</h2>
+      <p class="text-spa-muted max-w-md mx-auto mb-10 leading-relaxed">Call or text Annie directly. Same-day availability is often possible — no booking system, no waiting list, just a message.</p>
+      <a href={withBase('/contact')} class="inline-block bg-spa-gold text-spa-bg px-12 py-4 text-xs uppercase font-medium hover:opacity-90 transition-opacity duration-300" style="letter-spacing:0.22em">
+        View Contact Details
       </a>
     </div>
+
   </div>
+
+  <script>
+    (function () {
+      const sections = Array.from(document.querySelectorAll('[data-tab-section]'));
+      const tabs = Array.from(document.querySelectorAll('[data-tab]'));
+      if (!sections.length || !tabs.length) return;
+
+      const GOLD = '#d7b09a';
+      const MUTED = '#9a8f85';
+
+      function activate(tabId) {
+        // Hide all sections
+        sections.forEach(s => { (s as HTMLElement).style.display = 'none'; });
+        // Show target
+        const target = document.getElementById(tabId);
+        if (target) { (target as HTMLElement).style.display = 'block'; }
+        // Update tab visual state
+        tabs.forEach(t => {
+          const el = t as HTMLElement;
+          const isActive = el.getAttribute('data-tab') === tabId;
+          el.style.color = isActive ? GOLD : '';
+          el.style.borderBottom = isActive ? `2px solid ${GOLD}` : '2px solid transparent';
+        });
+        // Persist to URL without scrolling
+        history.replaceState(null, '', '#' + tabId);
+      }
+
+      // Wire up click handlers
+      tabs.forEach(t => {
+        t.addEventListener('click', () => {
+          const id = (t as HTMLElement).getAttribute('data-tab');
+          if (id) activate(id);
+        });
+      });
+
+      // On load: honour URL hash, else default to massage
+      const hash = location.hash.replace('#', '');
+      const valid = sections.some(s => s.id === hash);
+      activate(valid ? hash : 'massage');
+    })();
+  </script>
 </Layout>
