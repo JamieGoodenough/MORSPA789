@@ -57,15 +57,6 @@ const base = import.meta.env.BASE_URL;
   </style>
 </head>
 <body>
-  <script is:inline define:vars={{ base }}>
-    const authKey = 'morspa789-preview-auth';
-    const normalizedBase = base.endsWith('/') ? base : `${base}/`;
-    const loginPath = `${normalizedBase}login/`.replace(/\/+/g, '/').replace(':/', '://');
-    const currentPath = window.location.pathname;
-    if (currentPath !== loginPath && !localStorage.getItem(authKey)) {
-      window.location.replace(loginPath);
-    }
-  </script>
   <slot name="navbar" />
   <main>
     <slot />
