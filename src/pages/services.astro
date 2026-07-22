@@ -1,4 +1,4 @@
-﻿---
+---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
@@ -23,7 +23,7 @@ const signatureRituals = [
     composition: 'PAÑPURI Aromatherapy Massage (90 min) + Indian Head Massage (30 min)',
     desc: 'Pure surrender. Thai aromatherapy oils drawn across the whole body, followed by ancient Ayurvedic work across the head and crown. Scent, warmth and tradition in complete, unhurried harmony.',
     tag: 'Signature',
-    saving: 'Save £5 vs individual',
+    saving: 'Save £15 vs individual',
   },
   {
     name: 'The Full Release',
@@ -70,7 +70,7 @@ const aromaTreatments = [
   {
     title: 'Aromatherapy Massage',
     label: 'PAÑPURI Ritual',
-    pricing: [{ time: '30 mins', price: '£30' }, { time: '60 mins', price: '£50' }, { time: '90 mins', price: '£70' }],
+    pricing: [{ time: '30 mins', price: '£35' }, { time: '60 mins', price: '£55' }, { time: '90 mins', price: '£75' }],
     desc: 'Where therapeutic touch meets the art of scent. PAÑPURI aromatherapy blends — individually chosen in a brief consultation before every session — transform a massage into a fully sensory ritual. Warmth, pressure and fragrance working in concert, for results that reach well beyond the physical.',
     img: withBase('/images/thai-decor.jpg'),
   },
@@ -101,7 +101,7 @@ const expressTreatments = [
 const holisticTreatments = [
   {
     title: 'Indian Head Massage',
-    pricing: '30 mins · £30',
+    pricing: '30 mins · £35',
     desc: 'Drawn from centuries of Ayurvedic practice, this treatment addresses the head, neck and upper shoulder meridians where stress most tenaciously collects. A ritual that works on the mind as profoundly as the body — you emerge clearer, stiller, genuinely recalibrated.',
     img: withBase('/images/angkor-art.jpg'),
   },
@@ -120,31 +120,42 @@ const holisticTreatments = [
 ];
 
 const waxingServices = [
-  { title: 'Back Wax', price: 'From £15' },
-  { title: 'Chest Wax', price: 'From £12' },
+  { title: 'Back Wax', price: '£25' },
+  { title: 'Chest Wax', price: '£25' },
   { title: 'Half Leg Wax', price: 'From £12' },
   { title: 'Underarm Wax', price: '£8' },
-  { title: 'Eyebrow Tidy', price: '£8' },
+  { title: 'Eyebrow Tidy', price: '£5' },
   { title: 'Lip Wax', price: '£5' },
 ];
 
 const hairMen = [
-  { title: 'Men\'s Haircut', price: '£14', desc: 'A precise, considered cut tailored to head shape, face structure and everyday wearability. Consistently impeccable.' },
+  { title: 'Gents Cut', price: '£14', desc: 'A precise, considered cut tailored to head shape, face structure and everyday wearability. Consistently impeccable.' },
+];
+
+const gentsHair = [
+  { title: 'Gents Cut', price: '£14', desc: 'A precise, considered cut tailored to head shape, face structure and everyday wearability. Consistently impeccable.' },
   { title: 'Buzz Cut', price: '£10', desc: 'Clean edges, close finish. Fast, reliable and unfailingly sharp.' },
   { title: 'Elder Gentleman\'s Cut', price: '£11', desc: 'An unhurried, carefully considered service with the time and attention a seasoned client deserves.' },
   { title: 'Beard Shaping', price: '£5', desc: 'Defined lines, clean finish. Precision trimming that properly frames the face.' },
 ];
 
-const hairChildren = [
-  { title: 'Children\'s Cut & Trim', price: '£10', desc: 'Simple, friendly and efficient — results that parents and children both leave happy with.' },
+const gentsGrooming = [
+  { title: 'Back Wax', price: '£25' },
+  { title: 'Chest Wax', price: '£25' },
+  { title: 'Underarm Wax', price: '£8' },
+  { title: 'Eyebrow Tidy', price: '£5' },
 ];
 
-const hairWomen = [
-  { title: 'Blowdry & Finish', price: 'From £20', desc: 'A polished, lasting finish adapted to hair type and occasion.' },
-  { title: 'Cut & Blowdry', price: 'From £35', desc: 'A considered restyle or maintenance trim with a refined, lasting finish.' },
-  { title: 'Colour, Highlights & Balayage', price: 'On Consultation', desc: 'Full colour, highlights, lowlights, balayage and toning — each tailored in personal consultation.' },
-  { title: 'Perms & Restyles', price: 'On Consultation', desc: 'Structural transformations: perms, relaxers and significant changes in length, texture or direction.' },
-  { title: 'Bridal & Occasion Styling', price: 'On Consultation', desc: 'Upstyles, waves and sophisticated finishing for weddings, events and every milestone worth marking.' },
+const gentsMassage = [
+  { title: 'Traditional Thai Massage', pricing: '30 min · £35 · 60 min · £55 · 90 min · £75' },
+  { title: 'Deep Tissue Muscle Massage', pricing: '30 min · £35 · 60 min · £55 · 90 min · £75' },
+  { title: 'Swedish Massage', pricing: '30 min · £35 · 60 min · £55 · 90 min · £75' },
+  { title: 'Aromatherapy Massage', pricing: '30 min · £35 · 60 min · £55 · 90 min · £75' },
+  { title: 'Back, Neck & Shoulder Treatment', pricing: '30 min · £35' },
+  { title: 'Shoulder, Face & Scalp Treatment', pricing: '30 min · £35' },
+  { title: 'Indian Head Massage', pricing: '30 min · £35' },
+  { title: 'Reflexology Foot Massage', pricing: '30 min · £35 · 60 min · £55' },
+  { title: 'Herbal Compress Sapaya Massage', pricing: '60 min · £60 · 90 min · £80' },
 ];
 
 const categoryNav = [
@@ -155,6 +166,7 @@ const categoryNav = [
   { label: 'Holistic', tab: 'holistic' },
   { label: 'Grooming', tab: 'grooming' },
   { label: 'Hair', tab: 'hair' },
+  { label: 'Gents', tab: 'gents' },
 ];
 ---
 <Layout title="Treatments & Pricing | MOR SPA 789">
@@ -239,9 +251,9 @@ const categoryNav = [
             <p class="text-spa-muted leading-relaxed mb-10" style="line-height:1.85">{t.desc}</p>
             <div style="border:1px solid rgba(215,176,154,0.18);border-radius:2px">
               <p class="text-spa-gold text-xs uppercase font-medium px-6 pt-5 pb-4" style="letter-spacing:0.2em;border-bottom:1px solid rgba(215,176,154,0.1)">Pricing</p>
-              <div class="grid grid-cols-3 text-center">
+              <div class={`grid grid-cols-${t.pricing.length} text-center`}>
                 {t.pricing.map((p, pi) => (
-                  <div class="py-4" style={pi < 2 ? 'border-right:1px solid rgba(215,176,154,0.12)' : ''}>
+                  <div class="py-4" style={pi < t.pricing.length - 1 ? 'border-right:1px solid rgba(215,176,154,0.12)' : ''}>
                     <p class="text-spa-gold font-light" style="font-family:'Cormorant Garamond',serif;font-size:1.4rem">{p.price}</p>
                     <p class="text-spa-muted text-xs mt-1.5">{p.time}</p>
                   </div>
@@ -362,7 +374,7 @@ const categoryNav = [
       <p class="text-spa-muted mb-16 max-w-xl" style="line-height:1.85;padding-left:calc(2.5rem + 1.5rem)">I hold more than 19 years of professional expertise across all aspects of men's and women's hair — from precision cuts and fades to colour, perming and occasion styling. Every service is personal, unhurried and adapted to the individual.</p>
 
       <div class="mb-12">
-        <p class="text-spa-muted text-xs uppercase mb-6 tracking-widest font-medium pl-1">Men</p>
+        <p class="text-spa-muted text-xs uppercase mb-6 tracking-widest font-medium pl-1">Gents</p>
         <div class="grid md:grid-cols-2 gap-3">
           {hairMen.map(h => (
             <div
@@ -381,10 +393,32 @@ const categoryNav = [
         </div>
       </div>
 
-      <div class="mb-12">
-        <p class="text-spa-muted text-xs uppercase mb-6 tracking-widest font-medium pl-1">Children</p>
+      <div>
+        <p class="text-spa-muted text-xs uppercase mb-6 tracking-widest font-medium pl-1">Women</p>
+        <div class="p-8" style="border:1px solid rgba(215,176,154,0.15);border-radius:2px">
+          <p class="text-spa-gold text-xs uppercase mb-3 font-medium" style="letter-spacing:0.2em">By Appointment Only</p>
+          <p class="font-light text-spa-text mb-3" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;line-height:1.2">Women's hair services</p>
+          <p class="text-spa-muted leading-relaxed mb-6" style="line-height:1.85">All women's hair services — including cuts, blowdries, colour, highlights, balayage, perms and bridal styling — are available by appointment only. Please call or text to discuss your requirements and arrange a consultation.</p>
+          <a href="tel:07826872455" class="inline-flex items-center gap-3 text-spa-gold text-xs uppercase font-medium hover:opacity-70 transition-opacity" style="letter-spacing:0.2em">
+            Call 07826 872 455 to Book →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gents Menu -->
+    <section class="mb-24 tab-section" id="gents" data-tab-section>
+      <div class="flex items-center gap-6 mb-5">
+        <div class="w-10 h-px bg-spa-gold flex-shrink-0"></div>
+        <p class="text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.25em">Gents Services</p>
+      </div>
+      <p class="text-spa-muted mb-16 max-w-xl" style="line-height:1.85;padding-left:calc(2.5rem + 1.5rem)">Everything available for men — from a sharp haircut and beard shaping to waxing, massage and holistic treatments. All services are by appointment; call or text to arrange.</p>
+
+      <!-- Gents Hair -->
+      <div class="mb-14">
+        <p class="text-spa-gold text-xs uppercase mb-6 tracking-widest font-medium pl-1" style="letter-spacing:0.2em">Hair</p>
         <div class="grid md:grid-cols-2 gap-3">
-          {hairChildren.map(h => (
+          {gentsHair.map(h => (
             <div
               class="flex justify-between items-start px-6 py-5 transition-colors duration-200"
               style="border:1px solid rgba(215,176,154,0.12);border-radius:2px"
@@ -401,21 +435,37 @@ const categoryNav = [
         </div>
       </div>
 
+      <!-- Gents Grooming -->
+      <div class="mb-14">
+        <p class="text-spa-gold text-xs uppercase mb-6 tracking-widest font-medium pl-1" style="letter-spacing:0.2em">Grooming &amp; Waxing</p>
+        <div class="grid md:grid-cols-3 gap-3">
+          {gentsGrooming.map(w => (
+            <div
+              class="px-6 py-5 flex justify-between items-center transition-colors duration-200"
+              style="border:1px solid rgba(215,176,154,0.15);border-radius:2px"
+              onmouseenter="this.style.borderColor='rgba(215,176,154,0.3)'"
+              onmouseleave="this.style.borderColor='rgba(215,176,154,0.15)'"
+            >
+              <p class="text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:1.15rem">{w.title}</p>
+              <p class="text-spa-gold text-sm font-medium flex-shrink-0 ml-4">{w.price}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Gents Massage & Holistic -->
       <div>
-        <p class="text-spa-muted text-xs uppercase mb-6 tracking-widest font-medium pl-1">Women</p>
+        <p class="text-spa-gold text-xs uppercase mb-6 tracking-widest font-medium pl-1" style="letter-spacing:0.2em">Massage &amp; Holistic</p>
         <div class="grid md:grid-cols-2 gap-3">
-          {hairWomen.map(h => (
+          {gentsMassage.map(t => (
             <div
               class="flex justify-between items-start px-6 py-5 transition-colors duration-200"
               style="border:1px solid rgba(215,176,154,0.12);border-radius:2px"
               onmouseenter="this.style.borderColor='rgba(215,176,154,0.3)'"
               onmouseleave="this.style.borderColor='rgba(215,176,154,0.12)'"
             >
-              <div class="pr-6 flex-1">
-                <h3 class="font-light text-spa-text mb-1" style="font-family:'Cormorant Garamond',serif;font-size:1.15rem">{h.title}</h3>
-                <p class="text-spa-muted text-xs leading-relaxed" style="line-height:1.7">{h.desc}</p>
-              </div>
-              <p class="text-spa-gold text-sm flex-shrink-0 mt-0.5 text-right" style="min-width:5.5rem">{h.price}</p>
+              <h3 class="font-light text-spa-text pr-6 flex-1" style="font-family:'Cormorant Garamond',serif;font-size:1.15rem">{t.title}</h3>
+              <p class="text-spa-gold text-sm flex-shrink-0 mt-0.5 text-right" style="min-width:9rem">{t.pricing}</p>
             </div>
           ))}
         </div>

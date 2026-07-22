@@ -56,7 +56,6 @@ const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
 <script>
   const navbar = document.getElementById('navbar');
-  const sentinel = document.querySelector('.hero-sentinel');
 
   if (navbar) {
     const applySolid = () => {
@@ -65,30 +64,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
       navbar.style.borderBottom = '1px solid rgba(215,176,154,0.14)';
     };
 
-    const applyTransparent = () => {
-      navbar.style.backgroundColor = 'transparent';
-      navbar.style.backdropFilter = 'none';
-      navbar.style.borderBottom = 'none';
-    };
-
     applySolid();
-
-    if (sentinel) {
-      const obs = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting && window.scrollY < 24) {
-          applyTransparent();
-        } else {
-          applySolid();
-        }
-      }, { threshold: 0 });
-      obs.observe(sentinel);
-
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 24) {
-          applySolid();
-        }
-      }, { passive: true });
-    }
   }
 
   document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
