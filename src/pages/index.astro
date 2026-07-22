@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
@@ -9,23 +9,23 @@ const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const featuredServices = [
   {
     img: withBase('/images/massage-bed.jpg'),
-    label: 'Traditional Thai',
+    label: 'Signature Treatment',
     title: 'Traditional Thai Massage',
-    desc: 'Powerful, focused bodywork designed to relieve deep-seated muscular stress, stiffness and postural tension.',
+    desc: 'Ancient energy-line work that dissolves chronic tension from the inside out. No oils — pure pressure, rhythm and nineteen years of precision.',
     price: 'From £35',
   },
   {
     img: withBase('/images/massage-treatment.jpg'),
-    label: 'Deep Relief',
+    label: 'Therapeutic',
     title: 'Deep Tissue Muscle Massage',
-    desc: 'Targeted work for sore shoulders, tight backs and muscle fatigue, using pressure tailored to the body’s needs.',
+    desc: 'For those who carry their stress beneath the surface. Sustained, deliberate pressure addresses the knots and tightness ordinary massage cannot reach.',
     price: 'From £35',
   },
   {
     img: withBase('/images/thai-decor.jpg'),
     label: 'PAÑPURI Ritual',
     title: 'Aromatherapy Massage',
-    desc: 'Personalised Thai aromatherapy using PAÑPURI oils selected to support rest, recovery and emotional balance.',
+    desc: 'A fully sensory ritual — PAÑPURI luxury oils chosen for your body and mood, warming the skin and the room in equal measure.',
     price: 'From £30',
   },
 ];
@@ -43,10 +43,10 @@ const featuredServices = [
       <p class="text-spa-gold text-xs uppercase mb-8 font-medium" style="letter-spacing:0.25em;font-family:'DM Sans',sans-serif">81 Abbey End · Kenilworth · Open 11AM–8PM Daily</p>
       <img src={withBase('/images/logo.jpg')} alt="MOR SPA 789 logo" class="mx-auto mb-8 w-32 rounded-md shadow-2xl" />
       <h1 class="font-light leading-none mb-8 text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:clamp(3.4rem,9vw,6.5rem);letter-spacing:-0.02em;line-height:1.04">
-        Authentic Thai Massage<br />&amp; Unisex Hair Styling
+        Ancient Thai Ritual.<br />Expert Personal Care.
       </h1>
       <p class="text-spa-muted text-lg mb-12 font-light max-w-3xl mx-auto" style="letter-spacing:0.03em">
-        MOR SPA 789 brings together traditional Thai massage, holistic wellbeing, expert personal grooming and more than 19 years of beauty industry experience in one calm Kenilworth studio.
+        A private Kenilworth studio where tension dissolves, time slows, and every appointment is built around you. Thai massage, holistic therapies, expert hair — and more than 19 years of mastery behind every treatment.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-stretch sm:items-center max-w-md sm:max-w-none mx-auto">
         <a href={withBase('/services')} class="w-full sm:w-auto text-center border border-spa-gold text-spa-gold px-6 sm:px-8 py-4 text-xs uppercase font-medium hover:bg-spa-gold hover:text-spa-bg transition-all duration-300" style="letter-spacing:0.14em">
@@ -63,20 +63,20 @@ const featuredServices = [
   <section class="max-w-7xl mx-auto px-6 py-28 grid md:grid-cols-2 gap-16 items-center">
     <div>
       <div class="w-16 h-px bg-spa-gold mb-10"></div>
-      <blockquote class="font-light italic leading-snug text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.7rem)">
-        “Live life by the water — where Thai wisdom, personal care and modern calm meet.”
+        <blockquote class="font-light italic leading-snug text-spa-text" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.7rem)">
+        "Not a chain. Not a clinic. A private studio where the work is genuinely personal and every detail is considered."
       </blockquote>
     </div>
     <div>
       <p class="text-spa-gold text-xs uppercase mb-6 font-medium" style="letter-spacing:0.18em">About MOR SPA 789</p>
       <p class="text-spa-muted leading-relaxed mb-6">
-        Annie welcomes clients for home hair dressing and massage treatments in a warm, private setting. With more than 19 years in the beauty industry, she offers a rare blend of therapeutic bodywork and personalised styling for both men and women.
+        I work from a warm, private Kenilworth studio — welcoming clients by appointment for massage, holistic therapies and expert hair. With more than 19 years in the industry, I bring a level of personal attention that chain salons and walk-in spas simply cannot offer.
       </p>
       <p class="text-spa-muted leading-relaxed mb-6">
-        The massage menu includes traditional Thai massage, Swedish massage, deep tissue muscle massage, reflexology, herbal compress therapies and focused PAÑPURI express treatments.
+        My treatment menu spans traditional Thai massage, deep tissue, Swedish, reflexology, Indian head massage and herbal compress therapies — alongside focused PAÑPURI express treatments for clients with less time and exacting standards.
       </p>
       <p class="text-spa-muted leading-relaxed">
-        Signature aromatherapy rituals use <span class="text-spa-text">PAÑPURI Andaman Sails / Scent of Chaya</span> oils from Thailand to create a more immersive, restorative treatment experience.
+        Aromatherapy rituals use <span class="text-spa-text">PAÑPURI Andaman Sails and Scent of Chaya</span> — luxury Thai oils that transform a massage into something altogether more immersive.
       </p>
       <a href={withBase('/about')} class="inline-block mt-8 text-spa-gold text-xs uppercase font-medium" style="letter-spacing:0.18em;border-bottom:1px solid rgba(215,176,154,0.4);padding-bottom:4px">
         Learn More →
@@ -124,13 +124,13 @@ const featuredServices = [
     </div>
     <div>
       <p class="text-spa-gold text-xs uppercase mb-6 font-medium" style="letter-spacing:0.25em">Studio Philosophy</p>
-      <h2 class="font-light text-spa-text mb-8" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem)">Personal care with a traditional Thai touch</h2>
+      <h2 class="font-light text-spa-text mb-8" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem)">Nothing is rushed here</h2>
       <div class="w-10 h-px bg-spa-gold mb-8"></div>
       <p class="text-spa-muted leading-relaxed mb-6">
-        MOR SPA 789 is built around personal attention. Treatments are not rushed, and each session is adapted to the individual — whether the priority is deep muscular release, calm and rest, focused foot therapy or a polished hair refresh.
+        Every session is adapted to the individual. Pressure is discussed, not assumed. Oils are chosen, not defaulted to. The pace is yours — whether the priority is deep muscular release, genuine stillness, reflexology or a quietly exceptional haircut.
       </p>
       <p class="text-spa-muted leading-relaxed">
-        Alongside massage, clients can also book waxing, men’s and women’s cuts, colouring, restyles, perms and special occasion styling, making the studio a complete beauty and wellbeing destination.
+        The studio offers the full picture: Thai and holistic massage, PAÑPURI aromatherapy, waxing, precision men’s cuts, women’s colour and styling, and bridal and occasion appointments — all in one private, unhurried setting.
       </p>
     </div>
   </section>
@@ -151,9 +151,9 @@ const featuredServices = [
   </section>
 
   <section class="py-32 text-center px-6">
-    <p class="text-spa-gold text-xs uppercase mb-6 font-medium" style="letter-spacing:0.25em">Begin Your Journey</p>
-    <h2 class="font-light text-spa-text mb-8" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem)">Ready to arrange your treatment?</h2>
-    <p class="text-spa-muted max-w-2xl mx-auto mb-12 leading-relaxed">Explore real prices for Thai massage, deep tissue, aromatherapy, hair styling and holistic treatments — then call or text MOR SPA 789 directly to arrange a time.</p>
+    <p class="text-spa-gold text-xs uppercase mb-6 font-medium" style="letter-spacing:0.25em">By Appointment Only</p>
+    <h2 class="font-light text-spa-text mb-8" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem)">Reserve your treatment</h2>
+    <p class="text-spa-muted max-w-2xl mx-auto mb-12 leading-relaxed">Call or text Annie directly. No booking system, no waiting list — just a message. Same-day availability is often possible.</p>
     <a href={withBase('/contact')} class="inline-block bg-spa-gold text-spa-bg px-10 py-4 text-xs uppercase font-medium hover:opacity-90 transition-opacity duration-300" style="letter-spacing:0.18em">
       View Contact Details
     </a>
