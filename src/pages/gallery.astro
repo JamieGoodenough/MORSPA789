@@ -1,0 +1,132 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+
+// Add new images by dropping them into public/images/gallery/ as 12.jpg, 13.jpg etc.
+// Then add the number to this array.
+const galleryImages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+---
+<Layout title="Gallery | MOR SPA 789" description="A glimpse inside MOR SPA 789 — the studio, treatments and atmosphere.">
+  <Navbar slot="navbar" />
+  <Footer slot="footer" />
+
+  <!-- Hero -->
+  <section class="pt-36 pb-16 px-6">
+    <div class="max-w-7xl mx-auto">
+      <p class="text-spa-gold text-xs uppercase mb-4 font-medium" style="letter-spacing:0.25em">Kenilworth · MOR SPA 789</p>
+      <h1 class="font-light text-spa-text mb-5" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,6vw,4.5rem);letter-spacing:-0.02em;line-height:1.05">Gallery</h1>
+      <p class="text-spa-muted max-w-lg" style="line-height:1.85">A glimpse inside the studio. Click any image to view it full size.</p>
+    </div>
+  </section>
+
+  <!-- Thumbnail grid -->
+  <section class="max-w-7xl mx-auto px-6 pb-28">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      {galleryImages.map((n) => (
+        <button
+          class="gallery-thumb group overflow-hidden block w-full cursor-zoom-in"
+          data-index={n - 1}
+          style="border:1px solid rgba(215,176,154,0.12);border-radius:2px;background:none;padding:0"
+          aria-label={`View image ${n}`}
+        >
+          <div class="overflow-hidden" style="aspect-ratio:1/1">
+            <img
+              src={withBase(`/images/gallery/${n}.jpg`)}
+              alt={`MOR SPA 789 — image ${n}`}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <!-- Lightbox overlay -->
+  <div
+    id="lightbox"
+    class="fixed inset-0 z-50 flex items-center justify-center"
+    style="display:none!important;background:rgba(12,10,9,0.96);backdrop-filter:blur(8px)"
+    aria-modal="true"
+    role="dialog"
+    aria-label="Image viewer"
+  >
+    <!-- Close -->
+    <button id="lb-close" class="absolute top-5 right-6 text-spa-muted hover:text-spa-gold transition-colors z-10" aria-label="Close" style="background:none;border:none;cursor:pointer;font-size:2rem;line-height:1">&#x2715;</button>
+
+    <!-- Prev -->
+    <button id="lb-prev" class="absolute left-4 text-spa-muted hover:text-spa-gold transition-colors z-10 select-none" aria-label="Previous image" style="background:none;border:none;cursor:pointer;font-size:2.5rem;line-height:1;top:50%;transform:translateY(-50%)">&#8249;</button>
+
+    <!-- Image -->
+    <div class="w-full h-full flex items-center justify-center px-16">
+      <img
+        id="lb-img"
+        src=""
+        alt=""
+        class="max-w-full max-h-full object-contain"
+        style="max-height:90vh;border-radius:2px"
+      />
+    </div>
+
+    <!-- Next -->
+    <button id="lb-next" class="absolute right-4 text-spa-muted hover:text-spa-gold transition-colors z-10 select-none" aria-label="Next image" style="background:none;border:none;cursor:pointer;font-size:2.5rem;line-height:1;top:50%;transform:translateY(-50%)">&#8250;</button>
+
+    <!-- Counter -->
+    <p id="lb-counter" class="absolute bottom-5 left-0 right-0 text-center text-spa-muted text-xs" style="letter-spacing:0.2em"></p>
+  </div>
+</Layout>
+
+<script define:vars={{ galleryImages, base }}>
+  const withBase = (path) => `${base}${path.replace(/^\//, '')}`;
+  const srcs = galleryImages.map(n => withBase(`/images/gallery/${n}.jpg`));
+
+  const lightbox  = document.getElementById('lightbox');
+  const lbImg     = document.getElementById('lb-img');
+  const lbCounter = document.getElementById('lb-counter');
+  const lbClose   = document.getElementById('lb-close');
+  const lbPrev    = document.getElementById('lb-prev');
+  const lbNext    = document.getElementById('lb-next');
+
+  let current = 0;
+
+  function show(index) {
+    current = (index + srcs.length) % srcs.length;
+    lbImg.src = srcs[current];
+    lbImg.alt = `MOR SPA 789 — image ${current + 1}`;
+    lbCounter.textContent = `${current + 1} / ${srcs.length}`;
+    lightbox.style.setProperty('display', 'flex', 'important');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.style.setProperty('display', 'none', 'important');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  // Open on thumbnail click
+  document.querySelectorAll('.gallery-thumb').forEach(btn => {
+    btn.addEventListener('click', () => show(Number(btn.dataset.index)));
+  });
+
+  lbClose.addEventListener('click', close);
+  lbPrev.addEventListener('click', () => show(current - 1));
+  lbNext.addEventListener('click', () => show(current + 1));
+
+  // Click backdrop to close
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) close();
+  });
+
+  // Keyboard nav
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.style.display === 'none' || lightbox.style.display === '') return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+</script>
