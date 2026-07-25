@@ -2,13 +2,29 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import { readdir } from 'node:fs/promises';
+import { join } from 'node:path';
 
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 
-// Add new images by dropping them into public/images/gallery/ as 12.jpg, 13.jpg etc.
-// Then add the number to this array.
-const galleryImages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+// Automatically load all images from public/images/gallery/
+// Just drop any image file (.jpg, .jpeg, .png, .webp) in that folder and it will appear!
+const galleryDir = join(process.cwd(), 'public', 'images', 'gallery');
+const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
+
+const files = await readdir(galleryDir);
+const galleryImages = files
+  .filter(file => imageExtensions.some(ext => file.toLowerCase().endsWith(ext)))
+  .sort((a, b) => {
+    // Sort numerically if filenames are numbers
+    const numA = parseInt(a);
+    const numB = parseInt(b);
+    if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+    // Otherwise sort alphabetically
+    return a.localeCompare(b);
+  })
+  .map(file => `/images/gallery/${file}`);
 ---
 <Layout title="Gallery | MOR SPA 789" description="A glimpse inside MOR SPA 789 — the studio, treatments and atmosphere.">
   <Navbar slot="navbar" />
@@ -26,17 +42,17 @@ const galleryImages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
   <!-- Thumbnail grid -->
   <section class="max-w-7xl mx-auto px-6 pb-28">
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-      {galleryImages.map((n) => (
+      {galleryImages.map((imagePath, index) => (
         <button
           class="gallery-thumb group overflow-hidden block w-full cursor-zoom-in"
-          data-index={n - 1}
+          data-index={index}
           style="border:1px solid rgba(215,176,154,0.12);border-radius:2px;background:none;padding:0"
-          aria-label={`View image ${n}`}
+          aria-label={`View image ${index + 1}`}
         >
           <div class="overflow-hidden" style="aspect-ratio:1/1">
             <img
-              src={withBase(`/images/gallery/${n}.jpg`)}
-              alt={`MOR SPA 789 — image ${n}`}
+              src={withBase(imagePath)}
+              alt={`MOR SPA 789 — image ${index + 1}`}
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
@@ -82,7 +98,7 @@ const galleryImages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
 <script define:vars={{ galleryImages, base }}>
   const withBase = (path) => `${base}${path.replace(/^\//, '')}`;
-  const srcs = galleryImages.map(n => withBase(`/images/gallery/${n}.jpg`));
+  const srcs = galleryImages.map(path => withBase(path));
 
   const lightbox  = document.getElementById('lightbox');
   const lbImg     = document.getElementById('lb-img');
