@@ -35,6 +35,8 @@ jobs:
           GITHUB_ACTIONS: true
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          PUBLIC_SITE_URL: https://morspa789.com
+          PUBLIC_BASE_PATH: /
         run: npm run build
 
       - name: Upload artifact
